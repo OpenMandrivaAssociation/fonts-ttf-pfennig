@@ -22,8 +22,7 @@ Pfennig is a humanist sans-serif font with support for Latin, Cyrillic, Greek an
 %build
 for sfdfile in *.sfd
 do
-  fontforge -c "Open(\"$sfdfile\")
-    Generate(\"$sfdfile\":r + \".ttf\")"
+  fontforge -lang=ff -c "Open(\"./$sfdfile\"); Generate(\"./$sfdfile\":r + \".ttf\")"
 done
 
 %install
