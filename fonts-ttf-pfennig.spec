@@ -1,29 +1,31 @@
-%define pkgname pfennig-sfd
+%define pkgname pfennig
 
-Summary: Humanist sans-serif font family
-Name: fonts-ttf-pfennig
-Version: 20100831
-Release: %mkrel 1
-License: OFL
-Group: System/Fonts/True type
-URL: http://io.debian.net/~danielj/
-Source0: http://io.debian.net/~danielj/pfennig/%{pkgname}-%{version}.tar.bz2
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildArch: noarch
-BuildRequires: freetype-tools
-BuildRequires: fontforge
+Summary:	Humanist sans-serif font family
+Name:		fonts-ttf-pfennig
+Version:	20110924
+Release:	%mkrel 1
+License:	OFL
+Group:		System/Fonts/True type
+URL:		http://io.debian.net/~danielj/
+Source0:	http://io.debian.net/~danielj/pfennig/%{pkgname}-%{version}.tar.bz2
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildArch:	noarch
+BuildRequires:	freetype-tools
+BuildRequires:	dos2unix
 
 %description
-Pfennig is a humanist sans-serif font with support for Latin, Cyrillic, Greek and Hebrew character sets. It contains sufficient characters for Latin-0 through Latin-10, as well as glyphs for all modern Cyrillic orthographies, the full Vietnamese range, modern Greek, modern Hebrew, and the Pan-African Alphabet. It supports the standard Roman ligatures and uses OpenType tables for diacritic placement. The italic faces are true italics, not just oblique.
+Pfennig is a humanist sans-serif font with support for Latin, Cyrillic, Greek
+and Hebrew character sets. It contains sufficient characters for Latin-0
+through Latin-10, as well as glyphs for all modern Cyrillic orthographies,
+the full Vietnamese range, modern Greek, modern Hebrew, and the Pan-African
+Alphabet. It supports the standard Roman ligatures and uses OpenType tables
+for diacritic placement. The italic faces are true italics, not just oblique.
 
 %prep
 %setup -q -c -n %{pkgname}-%{version}
+dos2unix *.txt
 
 %build
-for sfdfile in *.sfd
-do
-  fontforge -lang=ff -c "Open(\"./$sfdfile\"); Generate(\"./$sfdfile\":r + \".ttf\")"
-done
 
 %install
 %__rm -rf %{buildroot}
@@ -31,7 +33,7 @@ done
 %__mkdir_p %{buildroot}%{_xfontdir}/TTF/pfennig
 
 %__install -m 644 *.ttf %{buildroot}%{_xfontdir}/TTF/pfennig
-ttmkfdir %{buildroot}%{_xfontdir}/TTF/pfennig > %{buildroot}%{_xfontdir}/TTF/pfennig/fonts.dir
+ttmkfdir %{buildroot}%{_xfontdir}/TTF/pfennig -o %{buildroot}%{_xfontdir}/TTF/pfennig/fonts.dir
 %__ln_s fonts.dir %{buildroot}%{_xfontdir}/TTF/pfennig/fonts.scale
 
 %__mkdir_p %{buildroot}%_sysconfdir/X11/fontpath.d/
@@ -43,12 +45,9 @@ ttmkfdir %{buildroot}%{_xfontdir}/TTF/pfennig > %{buildroot}%{_xfontdir}/TTF/pfe
 
 %files
 %defattr(-,root,root,-)
-%doc FONTLOG.txt
+%doc FONTLOG.txt OFL.txt
 %dir %{_xfontdir}/TTF/pfennig
 %{_xfontdir}/TTF/pfennig/*.ttf
 %verify(not mtime) %{_datadir}/fonts/TTF/pfennig/fonts.dir
 %{_xfontdir}/TTF/pfennig/fonts.scale
 %{_sysconfdir}/X11/fontpath.d/ttf-pfennig:pri=50
-
-
-
