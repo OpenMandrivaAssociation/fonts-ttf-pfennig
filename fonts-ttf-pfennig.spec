@@ -2,13 +2,12 @@
 
 Summary:	Humanist sans-serif font family
 Name:		fonts-ttf-pfennig
-Version:	20110924
+Version:	20120410
 Release:	%mkrel 1
 License:	OFL
 Group:		System/Fonts/True type
 URL:		http://io.debian.net/~danielj/
-Source0:	http://io.debian.net/~danielj/pfennig/%{pkgname}-%{version}.tar.bz2
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Source0:	%{pkgname}.zip
 BuildArch:	noarch
 BuildRequires:	freetype-tools
 BuildRequires:	dos2unix
@@ -28,8 +27,6 @@ dos2unix *.txt
 %build
 
 %install
-%__rm -rf %{buildroot}
-
 %__mkdir_p %{buildroot}%{_xfontdir}/TTF/pfennig
 
 %__install -m 644 *.ttf %{buildroot}%{_xfontdir}/TTF/pfennig
@@ -40,11 +37,8 @@ ttmkfdir %{buildroot}%{_xfontdir}/TTF/pfennig -o %{buildroot}%{_xfontdir}/TTF/pf
 %__ln_s ../../..%{_xfontdir}/TTF/pfennig \
     %{buildroot}%_sysconfdir/X11/fontpath.d/ttf-pfennig:pri=50
 
-%clean
-%__rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 %doc FONTLOG.txt OFL.txt
 %dir %{_xfontdir}/TTF/pfennig
 %{_xfontdir}/TTF/pfennig/*.ttf
