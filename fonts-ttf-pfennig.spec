@@ -3,7 +3,7 @@
 Summary:	Humanist sans-serif font family
 Name:		fonts-ttf-pfennig
 Version:	20110924
-Release:	%mkrel 1
+Release:	2
 License:	OFL
 Group:		System/Fonts/True type
 URL:		http://io.debian.net/~danielj/
